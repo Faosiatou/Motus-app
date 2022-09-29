@@ -1,0 +1,21 @@
+<script src="/jquery-3.6.0.js"></script>
+
+<form name="loginform">
+    <label>User name</label>
+    <input type="text" name="usr" id="name" placeholder="username"> 
+    <input type ="submit" value="enregistrer"/>
+</form>
+
+<script>
+    $("form").submit(function(e){
+        e.preventDefault()
+        var name = document.getElementById("name").value
+        //localStorage.setItem("name", name)
+        //console.log(localStorage.getItem("name"))
+        sessionStorage.setItem("name", name)
+
+        console.log(sessionStorage.getItem("name"))
+        document.location = "index.html"
+    })
+   
+</script>

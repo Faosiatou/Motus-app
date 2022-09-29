@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 5000
 
 
 app.use(express.static('www'));
@@ -19,3 +19,10 @@ app.get('/mot', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port http://localhost:${port}`)
   })
+
+  app.get('/login', (req, res) => {
+})
+
+
+
+    

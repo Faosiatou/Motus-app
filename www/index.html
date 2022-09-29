@@ -28,9 +28,28 @@
 </body>
     
     <script>
+    var score = 0
+    var tentatives = 0
 
 
+    if (sessionStorage.getItem("name") == null){ 
+    //if (localStorage.getItem("name") == null) 
 
+        document.location = "/login.html"       
+
+    }
+    if (localStorage.getItem("score")){
+        score = parseInt(localStorage.getItem("score"))
+    }
+    if(localStorage.getItem('tentatives')){
+
+        tentatives = parseInt(localStorage.getItem('tentatives'))
+        tentatives+=1
+
+        localStorage.setItem("tentatives", tentatives)
+
+    }
+    
     var current_word = "";
 
     $.get( "/mot", function( data ) {
@@ -59,6 +78,7 @@
             console.log(i,letter)
             if(letter == current_word[i]){
                 proposal_analysis += getSpan(letter,'palegreen')
+
             }else if(current_word.split('').includes(letter)){
                 found = false;
                 proposal_analysis += getSpan(letter,'orange')
@@ -67,11 +87,25 @@
                 proposal_analysis += getSpan(letter,'white')
             }
         }
+
+        tentatives +=1
+        localStorage.setItem("tentatives",tentatives)
+        if (proposal ==current_word){
+            score +=1
+            localStorage.setItem("score",score )
+            document.location = "/score.html" 
+              
+
+        }
+       
         $("#progress").append(proposal_analysis+"<br />") 
         $("#response").val('')
         $("#response").focus()
-    }
+        
+       
 
+    }
+    
     function getSpan(letter, color){
         console.log(letter)
         return `<span style="background-color:${color}">${letter.toUpperCase()}&nbsp</span>` 
